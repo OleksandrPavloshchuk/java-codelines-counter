@@ -15,6 +15,8 @@ import tests.java.code.line.counter.model.FileCountedLines;
  */
 class FileCounter extends CounterBase {
 
+    private static final int COMMENT_MARKER_LENGTH = 2;
+
     // States of the parser
     private enum ParserState {
         CODE,
@@ -40,17 +42,15 @@ class FileCounter extends CounterBase {
     @Override
     public CountedLines count() throws IOException {
         try (final BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // Loop by all lines if file:
+            // Loop by all lines in file:
             while (true) {
                 final String line = reader.readLine();
                 if (line == null) {
                     break;
                 }
-                // Make blank string empty:
+                // Make blank line empty:
                 str = line.trim();
-                if (!str.isEmpty()) {
-                    parseLine();
-                }
+                parseLine();
             }
         }
         final FileCountedLines result = new FileCountedLines(file.getName());
@@ -62,16 +62,21 @@ class FileCounter extends CounterBase {
      * Parse line of source and detect java code
      */
     private void parseLine() {
+        if (str.isEmpty()) {
+            return;
+        }
+        
         // One line comment is ended
         if (parserState == ParserState.COMMENT_ONE_LINE) {
             parserState = ParserState.CODE;
         }
         // Check if line starts with code
         lineContainsCode = parserState == ParserState.CODE;
-        if (isTailLongerThan2(0)) {
+        index = 0;
+        if (isTailLongerThan(COMMENT_MARKER_LENGTH)) {
 
             // Check line for switches:
-            for (index = 0; index <= str.length() - 2; index++) {
+            for (; index <= str.length() - COMMENT_MARKER_LENGTH; index++) {
                 if (isEndOfMultilineComment()) {
                     parserState = ParserState.CODE;
                     setNoCodeAtStart();
@@ -108,12 +113,8 @@ class FileCounter extends CounterBase {
         index++;
     }
 
-    private boolean isTailLongerThan2(int i) {
-        return isTailLongerThan(i, 2);
-    }
-
-    private boolean isTailLongerThan(int i, int limit) {
-        return (str.length() - i) >= limit;
+    private boolean isTailLongerThan(int limit) {
+        return (str.length() - index) >= limit;
     }
 
     /**
@@ -143,7 +144,7 @@ class FileCounter extends CounterBase {
      * @return true, if next 2 characters matches string s
      */
     private boolean matches(String s) {
-        return str.substring(index, index + 2).equals(s);
+        return str.substring(index, index + COMMENT_MARKER_LENGTH).equals(s);
     }
 
     /**
