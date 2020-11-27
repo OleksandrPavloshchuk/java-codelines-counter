@@ -1,14 +1,24 @@
 plugins {
-	id 'java'
+    id 'java'
+    id 'application'
 }
 
 group = 'tests.java-codelines-counter'
 version = '0.0.1.a'
 sourceCompatibility = '8'
 
+mainClassName = 'tests.java.code.line.counter.Main'
+
+jar {
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+}
+
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
+    testImplementation 'junit:junit:4.13.1'
 }
