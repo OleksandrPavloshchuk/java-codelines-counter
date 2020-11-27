@@ -1,0 +1,14 @@
+plugins {
+	id 'java'
+}
+
+group = 'tests.java-codelines-counter'
+version = '0.0.1.a'
+sourceCompatibility = '8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+}
