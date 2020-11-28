@@ -24,7 +24,7 @@ class DirCounter extends CounterBase {
             final String path = file.getCanonicalPath() + File.separator + fileName;
             final Counter subCounter = CounterFactory.build(path);
             if (subCounter != null) {
-                // Nested file is a directory of java source
+                // If subcounter is not null, then it is build over java source or directory
                 result.addChild(subCounter.count());
             }
         }

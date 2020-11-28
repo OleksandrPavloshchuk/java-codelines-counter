@@ -20,5 +20,6 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13.1'
+    testCompile 'junit:junit:4.13.1'
+    testCompile 'org.mockito:mockito-all:2.0.2-beta' 
 }

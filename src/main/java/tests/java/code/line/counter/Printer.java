@@ -42,10 +42,10 @@ public class Printer {
 
     /**
      * @param level
-     * @return offset of level spaces
+     * @return offset of level spaces (2 spaces per level)
      */
     private static String offset(int level) {
-        return String.join("", Collections.nCopies(level, " "));
+        return String.join("", Collections.nCopies(level, "  "));
     }
 
 }
