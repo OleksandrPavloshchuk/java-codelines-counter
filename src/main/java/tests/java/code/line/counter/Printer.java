@@ -1,6 +1,7 @@
 package tests.java.code.line.counter;
 
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Iterator;
 import tests.java.code.line.counter.model.CountedLines;
 
@@ -27,9 +28,8 @@ public class Printer {
      * @param ps 
      */
     private void print(int level, CountedLines countedLines, PrintStream ps) {
-        printOffset(level, ps);
         // Counted lines info
-        ps.printf("%s : %d\n", countedLines.getName(), countedLines.getCount());
+        ps.printf("%s%s : %d\n", offset(level), countedLines.getName(), countedLines.getCount());
         final Iterator<CountedLines> children = countedLines.getChildren();
         // Directory has children, but file does not
         if (children != null) {
@@ -41,15 +41,11 @@ public class Printer {
     }
 
     /**
-     * Print offset of counted lines by level
-     * 
      * @param level
-     * @param ps 
+     * @return offset of level spaces
      */
-    private void printOffset(int level, PrintStream ps) {
-        for (int i = 0; i < level; i++) {
-            ps.print("  ");
-        }
+    private static String offset(int level) {
+        return String.join("", Collections.nCopies(level, " "));
     }
 
 }

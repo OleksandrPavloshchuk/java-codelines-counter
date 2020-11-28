@@ -10,8 +10,8 @@ import java.util.Objects;
 public class CounterFactory {
 
     /**
-     * Open filePath and return the counter.If file is not java source, than
- return null
+     * Open filePath and return the counter. 
+     * If file is not java source, then return null.
      *
      * @param filePath
      * @return
@@ -33,7 +33,7 @@ public class CounterFactory {
     private static Counter buildFileCounter(File file) throws IOException {
         return isJavaSource(file) ? new FileCounter(file) : null;
     }
-    
+
     private static boolean isJavaSource(File file) throws IOException {
         return file.getPath().endsWith(".java");
     }

@@ -6,9 +6,9 @@ import tests.java.code.line.counter.model.CountedLines;
 import tests.java.code.line.counter.model.DirCountedLines;
 
 /**
- * Counter implementation for directory. Recursive traverse by subdirectories and files
+ * Counter implementation for directory.
  *
- * @author oleksandr
+ * Recursive traverse by subdirectories and files
  */
 class DirCounter extends CounterBase {
 
