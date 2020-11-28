@@ -3,7 +3,6 @@ package tests.java.code.line.counter.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Lines, counted in directory. Recurrently counts lines in all files and
@@ -33,11 +32,10 @@ public class DirCountedLines extends CountedLines {
     /**
      * Add counted child data to list
      *
-     * @param aChild
+     * @param child
      */
-    public void addChild(CountedLines aChild) {
-        final CountedLines child = Objects.requireNonNull(aChild, "child is null");
-        if (child.getCount() > 0) {
+    public void addChild(CountedLines child) {
+        if (child != null && child.getCount() > 0) {
             // Add only files and directories, which contains java code
             children.add(child);
         }
