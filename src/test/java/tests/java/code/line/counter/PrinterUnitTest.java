@@ -1,6 +1,5 @@
 package tests.java.code.line.counter;
 
-import com.sun.tools.doclint.Entity;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Iterator;
@@ -10,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import tests.java.code.line.counter.builder.CounterFactory;
 import tests.java.code.line.counter.model.CountedLines;
