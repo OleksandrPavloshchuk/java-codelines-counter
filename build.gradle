@@ -16,10 +16,11 @@ jar {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    testCompile 'junit:junit:4.13.1'
-    testCompile 'org.mockito:mockito-all:2.0.2-beta' 
+    testCompile 'junit:junit:4.13'
+    testCompile 'org.mockito:mockito-core:3.5.0' 
 }

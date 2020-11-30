@@ -48,13 +48,12 @@ public class PrinterUnitTest {
         Assert.assertEquals("3-lines.java", argIt.next());
         Assert.assertEquals(new Integer(3), ((Integer)argIt.next()));
         Assert.assertEquals("  ", argIt.next());
-        Assert.assertEquals("Calculator.java", argIt.next());
-        Assert.assertEquals(new Integer(94), ((Integer)argIt.next()));
-        Assert.assertEquals("  ", argIt.next());
         Assert.assertEquals("5-lines.java", argIt.next());
         Assert.assertEquals(new Integer(5), ((Integer)argIt.next()));
-        
-        
+        Assert.assertEquals("  ", argIt.next());
+        Assert.assertEquals("Calculator.java", argIt.next());
+        Assert.assertEquals(new Integer(94), ((Integer)argIt.next()));
+        Assert.assertFalse(argIt.hasNext());
 
     }
 

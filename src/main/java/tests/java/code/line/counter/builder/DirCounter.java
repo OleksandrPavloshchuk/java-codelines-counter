@@ -2,6 +2,7 @@ package tests.java.code.line.counter.builder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import tests.java.code.line.counter.model.CountedLines;
 import tests.java.code.line.counter.model.DirCountedLines;
 
@@ -19,8 +20,10 @@ class DirCounter extends CounterBase {
     @Override
     public CountedLines count() throws IOException {
         final DirCountedLines result = new DirCountedLines(file.getName());
+        final String[] fileNames = file.list();
+        Arrays.sort(fileNames);
         // Loop by all the subdirectories and files:
-        for (final String fileName : file.list()) {
+        for (final String fileName : fileNames) {
             final String path = file.getCanonicalPath() + File.separator + fileName;
             final Counter subCounter = CounterFactory.build(path);
             if (subCounter != null) {
