@@ -3,15 +3,18 @@ plugins {
     id 'application'
 }
 
-group = 'tests.java-codelines-counter'
+group = 'org.jcc'
 version = '0.0.1.b'
 sourceCompatibility = '8'
 
-mainClassName = 'tests.java.code.line.counter.Main'
+mainClassName = 'org.jcc.java.code.line.counter.cli.Main'
 
 jar {
     manifest {
         attributes 'Main-Class' : mainClassName
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -21,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':jcc-parsers')
+    implementation project(':jcc-parsers')
     testCompile 'junit:junit:4.13'
     testCompile 'org.mockito:mockito-core:3.5.0' 
 }
