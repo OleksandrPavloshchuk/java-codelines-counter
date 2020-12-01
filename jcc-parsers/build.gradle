@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'tests.java-codelines-counter'
+group = 'org.jcc'
 version = '0.0.1.b'
 sourceCompatibility = '8'
 
