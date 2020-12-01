@@ -3,7 +3,7 @@ package org.jcc.java.code.line.counter.cli;
 import java.io.IOException;
 import org.jcc.java.code.line.counter.Counter;
 import org.jcc.java.code.line.counter.CounterFactory;
-import org.jcc.java.code.line.counter.output.SimplePrinter;
+import org.jcc.java.code.line.counter.output.PrinterFactory;
 
 public class Main {
   
@@ -19,7 +19,7 @@ public class Main {
             System.out.println("File '" + path + "' is not java source file");
         } else {
             // Count lines of code in the tree and print it
-            new SimplePrinter().print(counter.count(), System.out);            
+            PrinterFactory.build(args).print(counter.count(), System.out);            
         }
     }
 }
