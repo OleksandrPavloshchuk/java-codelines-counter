@@ -1,3 +1,4 @@
 rootProject.name = 'java-codelines-counter'
 
-include 'legacy'
+include 'jcc-legacy'
+include 'jcc-parsers'

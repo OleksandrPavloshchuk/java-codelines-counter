@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'tests.java-codelines-counter'
-version = '0.0.1.a'
+version = '0.0.1.b'
 sourceCompatibility = '8'
 
 mainClassName = 'tests.java.code.line.counter.Main'
@@ -21,6 +21,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':jcc-parsers')
     testCompile 'junit:junit:4.13'
     testCompile 'org.mockito:mockito-core:3.5.0' 
 }

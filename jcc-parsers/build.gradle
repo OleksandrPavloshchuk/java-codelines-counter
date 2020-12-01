@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group = 'tests.java-codelines-counter'
+version = '0.0.1.b'
+sourceCompatibility = '8'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.13'
+    testCompile 'org.mockito:mockito-core:3.5.0' 
+}
