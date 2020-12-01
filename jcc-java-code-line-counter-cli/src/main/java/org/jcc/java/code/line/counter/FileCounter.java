@@ -78,7 +78,7 @@ class FileCounter extends CounterBase {
                         lineContainsCode = true;
                 }
             } else if (oldState == JavaParserState.COMMENT_START) {
-                switch (chr) {
+                switch(chr) {
                     case '/':
                     case '*':
                         return;
