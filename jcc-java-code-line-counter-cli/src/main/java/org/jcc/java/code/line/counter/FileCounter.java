@@ -12,7 +12,7 @@ import org.jcc.lines.CharsProcessor;
 import org.jcc.lines.LinesProcessor;
 import org.jcc.parsers.NextParserStateEvent;
 import org.jcc.parsers.ParserState;
-import org.jcc.parsers.impl.JavaParserState;
+import org.jcc.parsers.impl.java.JavaParserState;
 
 /**
  * Counter implementation for file.

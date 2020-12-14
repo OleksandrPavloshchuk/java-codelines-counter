@@ -1,18 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
-}
-
-group = 'org.jcc.java.code.line.counter'
-version = '0.0.1.b'
-sourceCompatibility = '8'
-
-mainClassName = 'org.jcc.java.code.line.counter.cli.Main'
-
-jar {
-    manifest {
-        attributes 'Main-Class' : mainClassName
-    }
 }
 
 repositories {

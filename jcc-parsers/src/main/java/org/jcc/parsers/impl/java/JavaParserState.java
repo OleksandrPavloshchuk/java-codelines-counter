@@ -1,4 +1,4 @@
-package org.jcc.parsers.impl;
+package org.jcc.parsers.impl.java;
 
 import org.jcc.parsers.ParserState;
 
