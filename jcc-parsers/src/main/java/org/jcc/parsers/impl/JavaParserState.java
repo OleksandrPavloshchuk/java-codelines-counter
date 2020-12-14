@@ -12,16 +12,13 @@ public enum JavaParserState implements ParserState {
                 case '/':
                     return COMMENT_START;
                 case '"':
-//                        fileCounter.lineContainsCode = true;
                     return STRING;
                 case '\'':
-//                        fileCounter.lineContainsCode = true;
                     return CHAR;
                 case ' ':
                 case '\t':
                     return CODE_BLANK;
                 default:
-//                        fileCounter.lineContainsCode = true;
                     return CODE_LITERAL;
             }
         }
@@ -63,11 +60,9 @@ public enum JavaParserState implements ParserState {
                 case ' ':
                 case '\t':
                     // There was '/' literal:
-                    //fileCounter.lineContainsCode = true;
                     return CODE_BLANK;
                 default:
                     // There was '/' literal:
-                    //fileCounter.lineContainsCode = true;
                     return CODE_LITERAL;
             }
         }

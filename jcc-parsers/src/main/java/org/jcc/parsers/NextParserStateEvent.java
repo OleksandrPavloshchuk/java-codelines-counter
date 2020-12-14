@@ -4,11 +4,9 @@ public class NextParserStateEvent {
 
     private final int chr;
     private final ParserState oldParserState;
-    private final ParserState newParserState;
 
-    public NextParserStateEvent(int chr, ParserState oldParserState, ParserState newParserState) {
+    public NextParserStateEvent(int chr, ParserState oldParserState) {
         this.chr = chr;
-        this.newParserState = newParserState;
         this.oldParserState = oldParserState;
     }
 
@@ -18,10 +16,6 @@ public class NextParserStateEvent {
 
     public ParserState getOldParserState() {
         return oldParserState;
-    }
-
-    public ParserState getNewParserState() {
-        return newParserState;
     }
 
 }

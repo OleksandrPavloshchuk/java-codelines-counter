@@ -9,13 +9,13 @@ public interface ParserState {
 
     default ParserState next(int c, Collection<Consumer<NextParserStateEvent>> eventListerens) {
         final ParserState newState = next(c);
-        EventListenerUtility.fireEvent(new NextParserStateEvent(c, this, newState), eventListerens);
+        EventListenerUtility.fireEvent(new NextParserStateEvent(c, this), eventListerens);
         return newState;
     }
 
     default ParserState nextOnNewLine(Collection<Consumer<NextParserStateEvent>> eventListerens) {
         final ParserState newState = nextOnNewLine();
-        EventListenerUtility.fireEvent(new NextParserStateEvent('\n', this, newState), eventListerens);
+        EventListenerUtility.fireEvent(new NextParserStateEvent('\n', this), eventListerens);
         return newState;
     }
 
