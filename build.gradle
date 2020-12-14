@@ -3,11 +3,11 @@ plugins {
     id 'application'
 }
 
-group = 'tests.java-codelines-counter'
-version = '0.0.1.a'
+group = 'org.jcc.java.code.line.counter'
+version = '0.0.1.b'
 sourceCompatibility = '8'
 
-mainClassName = 'tests.java.code.line.counter.Main'
+mainClassName = 'org.jcc.java.code.line.counter.cli.Main'
 
 jar {
     manifest {

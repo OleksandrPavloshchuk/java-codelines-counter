@@ -1,7 +1,6 @@
 package org.jcc.java.code.line.counter.output;
 
 import java.io.PrintStream;
-import java.util.Collections;
 import java.util.Iterator;
 import org.jcc.java.code.line.counter.model.CountedLines;
 
@@ -18,7 +17,7 @@ class XmlPrinter implements Printer {
      */
     @Override
     public void print(CountedLines countedLines, PrintStream ps) {
-        ps.printf("<java-sources name=\"%s\" count=\"%d\">\n", countedLines.getName(), countedLines.getCount());
+        ps.printf("<java-sources name=\"%s\" count=\"%d\">", countedLines.getName(), countedLines.getCount());
         final Iterator<CountedLines> children = countedLines.getChildren();
         // Directory has children, but file does not
         if (children != null) {
@@ -27,6 +26,6 @@ class XmlPrinter implements Printer {
                 print( children.next(), ps);
             }
         }
-        ps.println("</java-sources>");
+        ps.print("</java-sources>");
     }
 }

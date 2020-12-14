@@ -12,7 +12,7 @@ import org.jcc.java.code.line.counter.model.DirCountedLines;
  */
 class DirCounter extends CounterBase {
 
-    public DirCounter(File file) {
+    DirCounter(File file) {
         super(file);
     }
 

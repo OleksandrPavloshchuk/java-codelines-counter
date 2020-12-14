@@ -1,15 +1,15 @@
 package org.jcc.java.code.line.counter;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Consumer;
 import org.jcc.java.code.line.counter.model.CountedLines;
 import org.jcc.java.code.line.counter.model.FileCountedLines;
+import org.jcc.lines.CharsProcessor;
+import org.jcc.lines.LinesProcessor;
 import org.jcc.parsers.NextParserStateEvent;
 import org.jcc.parsers.ParserState;
 import org.jcc.parsers.impl.JavaParserState;
@@ -31,16 +31,13 @@ class FileCounter extends CounterBase {
     private final Collection<Consumer<NextParserStateEvent>> listeners
             = Arrays.asList(getListener());
 
-    public FileCounter(File file) throws FileNotFoundException {
+    FileCounter(File file) throws FileNotFoundException {
         super(file);
     }
 
     @Override
     public CountedLines count() throws IOException {
-        try (final BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            reader.lines()
-                    .forEach(line -> parseLine(line.trim()));
-        }
+        LinesProcessor.loopByLines(file, this::parseLine);
         final FileCountedLines result = new FileCountedLines(file.getName());
         result.setCount(count);
         return result;
@@ -50,14 +47,8 @@ class FileCounter extends CounterBase {
      * Parse line of source and detect java code
      */
     private void parseLine(String line) {
-
-        // Set parser state for start of line
-        parserState = parserState.nextOnNewLine(listeners);
         lineContainsCode = false;
-        line.chars().forEach(c -> {
-            // Switch parser state and conditionally set 'contains code' indicator
-            parserState = parserState.next(c, listeners);
-        });
+        parserState = new CharsProcessor(parserState, listeners).loopByChars(line);        
         if (lineContainsCode) {
             // Code is detected in this line
             count++;
@@ -73,12 +64,13 @@ class FileCounter extends CounterBase {
                     case '/':
                     case ' ':
                     case '\t':
+                    case '\n':
                         return;
                     default:
                         lineContainsCode = true;
                 }
             } else if (oldState == JavaParserState.COMMENT_START) {
-                switch(chr) {
+                switch (chr) {
                     case '/':
                     case '*':
                         return;
