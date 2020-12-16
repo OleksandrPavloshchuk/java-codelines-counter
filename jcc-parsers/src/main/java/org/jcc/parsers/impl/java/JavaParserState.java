@@ -18,6 +18,7 @@ public enum JavaParserState implements ParserState {
                 case ' ':
                 case '\t':
                 case '\n':
+                case END_OF_FILE:
                     return CODE_BLANK;
                 default:
                     return CODE_LITERAL;
@@ -39,6 +40,7 @@ public enum JavaParserState implements ParserState {
                 case ' ':
                 case '\t':
                 case '\n':
+                case END_OF_FILE:
                     return CODE_BLANK;
                 default:
                     return CODE_LITERAL;
@@ -69,7 +71,7 @@ public enum JavaParserState implements ParserState {
     LINE_COMMENT {
         @Override
         public ParserState next(int c) {
-            if ('\n' == c) {
+            if ('\n' == c || END_OF_FILE == c) {
                 return CODE_BLANK;
             } else {
                 return this;
@@ -157,4 +159,7 @@ public enum JavaParserState implements ParserState {
             return CHAR;
         }
     };
+
+    private static final int END_OF_FILE = -1;
+
 }

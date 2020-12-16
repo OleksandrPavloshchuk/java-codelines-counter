@@ -22,6 +22,7 @@ public class CharsProcessor {
         while (true) {
             int c = inputStream.read();
             if (-1 == c) {
+                parserState.next(c, listeners);
                 return;
             }
             parserState = parserState.next(c, listeners);

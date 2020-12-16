@@ -35,7 +35,7 @@ class FileCounter extends CounterBase {
 
     @Override
     public CountedLines count() throws IOException {
-        new CharsProcessor(JavaParserState.CODE_BLANK, listeners).loopByBytes( new FileInputStream(file));        
+        new CharsProcessor(JavaParserState.CODE_BLANK, listeners).loopByBytes(new FileInputStream(file));
         final FileCountedLines result = new FileCountedLines(file.getName());
         result.setCount(count);
         return result;
@@ -44,7 +44,7 @@ class FileCounter extends CounterBase {
     private Consumer<NextParserStateEvent> getListener() {
         return event -> {
             final int chr = event.getChr();
-            if ('\n' == chr) {
+            if ('\n' == chr || -1 == chr) {
                 if (lineContainsCode) {
                     count++;
                 }
