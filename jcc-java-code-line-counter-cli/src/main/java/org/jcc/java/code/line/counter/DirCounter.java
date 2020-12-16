@@ -21,8 +21,7 @@ class DirCounter extends CounterBase {
         final DirCountedLines result = new DirCountedLines(file.getName());
         // Loop by all the subdirectories and files:
         for (final String fileName : file.list()) {
-            final String path = file.getCanonicalPath() + File.separator + fileName;
-            final Counter subCounter = CounterFactory.build(path);
+            final Counter subCounter = CounterFactory.build(file.getCanonicalPath() + File.separator + fileName);
             if (subCounter != null) {
                 // If subcounter is not null, then it is build over java source or directory
                 result.addChild(subCounter.count());

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -35,7 +36,9 @@ class FileCounter extends CounterBase {
 
     @Override
     public CountedLines count() throws IOException {
-        new CharsProcessor(JavaParserState.CODE_BLANK, listeners).loopByBytes(new FileInputStream(file));
+        try (final InputStream inputStream = new FileInputStream(file)) {
+            new CharsProcessor(JavaParserState.CODE_BLANK, listeners).loopByChars(inputStream);
+        }
         final FileCountedLines result = new FileCountedLines(file.getName());
         result.setCount(count);
         return result;
@@ -44,7 +47,7 @@ class FileCounter extends CounterBase {
     private Consumer<NextParserStateEvent> getListener() {
         return event -> {
             final int chr = event.getChr();
-            if ('\n' == chr || -1 == chr) {
+            if (isEndOfLine(chr)) {
                 if (lineContainsCode) {
                     count++;
                 }
@@ -74,5 +77,9 @@ class FileCounter extends CounterBase {
             }
 
         };
+    }
+
+    private static boolean isEndOfLine(int c) {
+        return '\n' == c || -1 == c;
     }
 }

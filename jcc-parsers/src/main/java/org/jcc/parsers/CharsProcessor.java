@@ -18,15 +18,12 @@ public class CharsProcessor {
         this.listeners = listeners;
     }
 
-    public void loopByBytes(InputStream inputStream) throws IOException {
-        while (true) {
-            int c = inputStream.read();
-            if (-1 == c) {
-                parserState.next(c, listeners);
-                return;
-            }
+    public void loopByChars(InputStream inputStream) throws IOException {
+        int c;
+        do {
+            c = inputStream.read();
             parserState = parserState.next(c, listeners);
-        }
+        } while (c != -1);
     }
 
 }
