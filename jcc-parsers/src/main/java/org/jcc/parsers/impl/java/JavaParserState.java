@@ -17,6 +17,7 @@ public enum JavaParserState implements ParserState {
                     return CHAR;
                 case ' ':
                 case '\t':
+                case '\n':
                     return CODE_BLANK;
                 default:
                     return CODE_LITERAL;
@@ -37,16 +38,13 @@ public enum JavaParserState implements ParserState {
                     return CHAR;
                 case ' ':
                 case '\t':
+                case '\n':
                     return CODE_BLANK;
                 default:
                     return CODE_LITERAL;
             }
         }
 
-        @Override
-        public ParserState nextOnNewLine() {
-            return CODE_BLANK;
-        }
     },
     // from '/' possibly comment start:
     COMMENT_START {
@@ -71,13 +69,11 @@ public enum JavaParserState implements ParserState {
     LINE_COMMENT {
         @Override
         public ParserState next(int c) {
-            // After line comment start we should skip the line
-            return this;
-        }
-
-        @Override
-        public ParserState nextOnNewLine() {
-            return CODE_BLANK;
+            if ('\n' == c) {
+                return CODE_BLANK;
+            } else {
+                return this;
+            }
         }
     },
     // from multiline block comment:

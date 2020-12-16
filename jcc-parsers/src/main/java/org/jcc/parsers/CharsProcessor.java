@@ -1,28 +1,31 @@
-package org.jcc.lines;
+package org.jcc.parsers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.function.Consumer;
-import org.jcc.parsers.NextParserStateEvent;
-import org.jcc.parsers.ParserState;
 
 /**
  * Char by char processor
  */
 public class CharsProcessor {
-    
+
     private ParserState parserState;
     private final Collection<Consumer<NextParserStateEvent>> listeners;
-    
+
     public CharsProcessor(ParserState parserState, Collection<Consumer<NextParserStateEvent>> listeners) {
         this.parserState = parserState;
         this.listeners = listeners;
-    }    
-    
-    public ParserState loopByChars(String line) {
-        parserState = parserState.nextOnNewLine(listeners);
-        line.chars().forEach(c -> {            
-            parserState = parserState.next(c, listeners);
-        });
-        return parserState;
     }
+
+    public void loopByBytes(InputStream inputStream) throws IOException {
+        while (true) {
+            int c = inputStream.read();
+            if (-1 == c) {
+                return;
+            }
+            parserState = parserState.next(c, listeners);
+        }
+    }
+
 }

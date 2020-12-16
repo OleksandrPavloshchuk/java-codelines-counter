@@ -26,7 +26,7 @@ public class JavaLanguageInfo implements LanguageInfo {
             "boolean", "int", "float", "double", "long", "short",
             "char", "byte", "package", "synchronized",
             "volatile", "if", "for", "while", "do", "switch",
-            "case", "new", "break", "continue", "goto"
+            "case", "new", "break", "continue", "goto", "return"
     );
 
     @Override
