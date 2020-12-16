@@ -14,9 +14,8 @@ public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory<JavaParse
 
     @Override
     public void accept(NextParserStateEvent event) {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    
-
 }

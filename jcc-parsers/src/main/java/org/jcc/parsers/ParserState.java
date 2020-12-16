@@ -9,8 +9,9 @@ public interface ParserState {
 
     default ParserState next(int c, Collection<Consumer<NextParserStateEvent>> eventListerens) {
         final ParserState newState = next(c);
-        EventListenerUtility.fireEvent(new NextParserStateEvent(c, this), eventListerens);
+        final NextParserStateEvent event = new NextParserStateEvent(c, this);
+        eventListerens.forEach(l -> l.accept(event));
         return newState;
     }
-    
+
 }
