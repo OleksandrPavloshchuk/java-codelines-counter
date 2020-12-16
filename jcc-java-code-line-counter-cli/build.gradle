@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.jcc'
+version = '0.0.1.b'
+sourceCompatibility = '8'
+
+mainClassName = 'org.jcc.java.code.line.counter.cli.Main'
+
+jar {
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':jcc-parsers')
+    testCompile 'junit:junit:4.13'
+    testCompile 'org.mockito:mockito-core:3.5.0' 
+}

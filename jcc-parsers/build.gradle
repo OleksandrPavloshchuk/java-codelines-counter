@@ -2,6 +2,10 @@ plugins {
     id 'java'
 }
 
+group = 'org.jcc'
+version = '0.0.1.b'
+sourceCompatibility = '8'
+
 repositories {
     mavenLocal()
     mavenCentral()
