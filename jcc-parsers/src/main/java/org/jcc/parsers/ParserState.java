@@ -1,5 +1,6 @@
 package org.jcc.parsers;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Consumer;
 
@@ -9,9 +10,13 @@ public interface ParserState {
 
     default ParserState next(int c, Collection<Consumer<NextParserStateEvent>> eventListerens) {
         final ParserState newState = next(c);
-        final NextParserStateEvent event = new NextParserStateEvent(c, this);
+        final NextParserStateEvent event = new NextParserStateEvent(c, this, newState);
         eventListerens.forEach(l -> l.accept(event));
         return newState;
     }
+    
+    default ParserState next(int c, Consumer<NextParserStateEvent> listener) {
+        return next(c, Arrays.asList(listener));
+    }    
 
 }

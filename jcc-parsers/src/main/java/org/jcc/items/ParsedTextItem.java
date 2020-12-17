@@ -26,5 +26,10 @@ public class ParsedTextItem {
     public Type getType() {
         return type;
     }
+    
+    @Override
+    public String toString() {
+        return "{" + type.name() + ": '" + text + "'}";
+    }
          
 }
