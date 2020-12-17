@@ -22,9 +22,7 @@ import org.jcc.parsers.impl.java.JavaParserState;
  */
 class FileCounter extends CounterBase {
 
-    // Is current line contains code?
     private boolean lineContainsCode = false;
-    // Counter
     private int count = 0;
     // Parse state change listeners
     private final Collection<Consumer<NextParserStateEvent>> listeners

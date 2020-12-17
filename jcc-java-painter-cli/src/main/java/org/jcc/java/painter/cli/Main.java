@@ -7,10 +7,12 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import org.jcc.items.ParsedTextItem;
+import org.jcc.java.painter.output.HtmlPrinter;
 import org.jcc.parsers.CharsProcessor;
 import org.jcc.parsers.impl.java.JavaParsedTextItemsFactory;
 import org.jcc.parsers.impl.java.JavaParserState;
 
+// Here is comment:
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -28,7 +30,8 @@ public class Main {
                     new CharsProcessor(JavaParserState.CODE_BLANK, Arrays.asList(parsedTextItemFactory)).loopByChars(inputStream);
                 }
                 final List<ParsedTextItem> items = parsedTextItemFactory.getItems();
-                System.out.println("TRACE: items =\n\n" + items );
+                
+                new HtmlPrinter(System.out).print(items);
             }
         }
     }

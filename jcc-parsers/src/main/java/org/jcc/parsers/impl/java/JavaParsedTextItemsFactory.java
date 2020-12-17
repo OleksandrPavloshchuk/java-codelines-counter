@@ -43,12 +43,14 @@ public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory<JavaParse
                     break;
                 case STRING:
                 case PROTECTED_CHAR_IN_STRING:
+                    append(c);
                     addString();
-                    break;
+                    return;
                 case CHAR:
                 case PROTECTED_CHAR_IN_CHAR:
+                    append(c);
                     addChar();
-                    break;
+                    return;
                 case CODE_LITERAL:
                     if (isKeyword()) {
                         addKeyword();
