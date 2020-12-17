@@ -7,10 +7,10 @@ import org.jcc.parsers.ParserState;
 /**
  * Parsed items factory for java
  */
-public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory<JavaParserState> {
+public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory {
 
     public JavaParsedTextItemsFactory() {
-        super(new JavaLanguageInfo(), JavaParserState.CODE_BLANK);
+        super(new JavaLanguageInfo());
     }
 
     @Override
@@ -24,10 +24,10 @@ public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory<JavaParse
         }
         final ParserState newParserState = event.getNewParserState();
         if (newParserState == JavaParserState.CODE_LITERAL && isDelimiter(c)) {
-            if (isKeyword()) {
-                addKeyword();
+            if( oldParserState== JavaParserState.CODE_LITERAL) {
+                addKeywordOrIdentifier();
             } else {
-                addIdentifier();
+                addBlank();
             }
             append(c);
             addDelimiter();
@@ -52,14 +52,18 @@ public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory<JavaParse
                     addChar();
                     return;
                 case CODE_LITERAL:
-                    if (isKeyword()) {
-                        addKeyword();
-                    } else {
-                        addIdentifier();
-                    }
+                    addKeywordOrIdentifier();
             }
         }
         append(c);
+    }
+
+    private void addKeywordOrIdentifier() {
+        if (isKeyword()) {
+            addKeyword();
+        } else {
+            addIdentifier();
+        }
     }
 
 }

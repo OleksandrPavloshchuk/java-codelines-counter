@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'org.jcc'
-version = '0.0.1.b'
+version = '0.0.2.a'
 sourceCompatibility = '8'
 
 mainClassName = 'org.jcc.java.code.line.counter.cli.Main'

@@ -8,7 +8,7 @@ import org.jcc.java.code.line.counter.model.CountedLines;
 /**
  * Print counted lines to some print stream
  */
-class SimplePrinter implements Printer {
+class SimplePrinter implements CountedLinesPrinter {
 
     /**
      * Print counted lines into print stream

@@ -3,8 +3,9 @@ package org.jcc.java.painter.output;
 import java.io.PrintStream;
 import java.util.List;
 import org.jcc.items.ParsedTextItem;
+import org.jcc.output.Printer;
 
-public class HtmlPrinter {
+public class HtmlPrinter implements Printer<List<ParsedTextItem>> {
 
     private enum HtmlClass {
         BLANK("black"),
@@ -21,13 +22,11 @@ public class HtmlPrinter {
         }
     }
 
-    private final PrintStream ps;
+    private PrintStream ps;
 
-    public HtmlPrinter(PrintStream ps) {
+    @Override
+    public void print(List<ParsedTextItem> items, PrintStream ps) {
         this.ps = ps;
-    }
-
-    public void print(List<ParsedTextItem> items) {
         printHeader();
         items.forEach(item -> printItem(item));
         printFooter();
@@ -35,28 +34,32 @@ public class HtmlPrinter {
 
     private void printHeader() {
         ps.print("<html><head><style type=\"text/css\">");
-        for( final HtmlClass htmlClass : HtmlClass.values()) {
-            ps.print( ".");
-            ps.print(htmlClass.name());
-            ps.print( " { color:");
-            ps.print( htmlClass.color);
-            ps.println( ";}");
+        for (final HtmlClass htmlClass : HtmlClass.values()) {
+            printHtmlClass(htmlClass);
         }
         ps.println("</style></head><body>");
     }
 
+    private void printHtmlClass(HtmlClass htmlClass) {
+        ps.print("\n.");
+        ps.print(htmlClass.name());
+        ps.print(" { color:");
+        ps.print(htmlClass.color);
+        ps.print("; }");
+    }
+
     private void printItem(ParsedTextItem item) {
         ps.print("<span class=\"");
-        ps.print( item.getType().name());
-        ps.print( "\">");
-        ps.print( prepare(item.getText()));
-        ps.print( "</span>");
+        ps.print(item.getType().name());
+        ps.print("\">");
+        ps.print(prepare(item.getText()));
+        ps.print("</span>");
     }
 
     private void printFooter() {
         ps.print("</body></html>");
     }
-    
+
     private static String prepare(String src) {
         return src.replace("<", "&lt;")
                 .replace("\n", "<br/>")

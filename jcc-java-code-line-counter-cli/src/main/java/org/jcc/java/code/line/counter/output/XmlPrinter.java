@@ -7,7 +7,7 @@ import org.jcc.java.code.line.counter.model.CountedLines;
 /**
  * Print counted lines to some print stream
  */
-class XmlPrinter implements Printer {
+class XmlPrinter implements CountedLinesPrinter {
 
     /**
      * Print counted lines into print stream

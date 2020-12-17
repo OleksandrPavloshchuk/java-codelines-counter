@@ -2,7 +2,7 @@ package org.jcc.java.code.line.counter.output;
 
 public class PrinterFactory {
 
-    public static Printer build(String[] args) {
+    public static CountedLinesPrinter build(String[] args) {
         if (contains(args, "txt")) {
             return new SimplePrinter();
         } else if (contains(args, "xml")) {

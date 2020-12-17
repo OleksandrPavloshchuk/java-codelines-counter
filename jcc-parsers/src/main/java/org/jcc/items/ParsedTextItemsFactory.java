@@ -5,24 +5,19 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jcc.parsers.LanguageInfo;
 import org.jcc.parsers.NextParserStateEvent;
-import org.jcc.parsers.ParserState;
 
 /**
  * Consumes lines and generates stream of parsed text items
- *
- * @param <T> parser state implementation
  */
-public abstract class ParsedTextItemsFactory<T extends ParserState> implements Consumer<NextParserStateEvent> {
+public abstract class ParsedTextItemsFactory implements Consumer<NextParserStateEvent> {
 
     private final LanguageInfo languageInfo;
-    protected final T parserState;
 
     private final List<ParsedTextItem> items = new ArrayList<>();
     private final StringBuilder accumulator = new StringBuilder(16);
 
-    public ParsedTextItemsFactory(LanguageInfo languageInfo, T parserState) {
+    public ParsedTextItemsFactory(LanguageInfo languageInfo) {
         this.languageInfo = languageInfo;
-        this.parserState = parserState;
     }
 
     public List<ParsedTextItem> getItems() {
