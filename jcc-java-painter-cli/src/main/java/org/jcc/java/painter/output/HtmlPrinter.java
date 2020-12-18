@@ -3,9 +3,8 @@ package org.jcc.java.painter.output;
 import java.io.PrintStream;
 import java.util.List;
 import org.jcc.items.ParsedTextItem;
-import org.jcc.output.Printer;
 
-public class HtmlPrinter implements Printer<List<ParsedTextItem>> {
+public class HtmlPrinter implements ParsedTextItemsPrinter {
 
     private enum HtmlClass {
         BLANK("black"),
@@ -14,6 +13,8 @@ public class HtmlPrinter implements Printer<List<ParsedTextItem>> {
         CHAR("#990099"),
         KEYWORD("#009900"),
         DELIMITER("black"),
+        NUMBER("#009900"),
+        META("#0000cc"),
         IDENTIFIER("#006699");
         private final String color;
 

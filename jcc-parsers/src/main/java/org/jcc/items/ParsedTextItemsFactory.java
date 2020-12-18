@@ -33,6 +33,10 @@ public abstract class ParsedTextItemsFactory implements Consumer<NextParserState
             accumulator.append((char) c);
         }
     }
+    
+    protected char getFirstChar() {
+        return accumulator.length()>0 ? accumulator.charAt(0) : 0;
+    }
 
     protected boolean isDelimiter(int c) {
         return languageInfo.getDelimiters().contains(c);
@@ -64,8 +68,16 @@ public abstract class ParsedTextItemsFactory implements Consumer<NextParserState
 
     protected void addString() {
         addNewItem(ParsedTextItem.Type.STRING);
-    }
+    }  
 
+    protected void addNumber() {
+        addNewItem(ParsedTextItem.Type.NUMBER);
+    }  
+    
+    protected void addMeta() {
+        addNewItem(ParsedTextItem.Type.META);
+    }       
+    
     private void addNewItem(ParsedTextItem.Type type) {
         items.add(new ParsedTextItem(type, accumulator.toString()));
         accumulator.setLength(0);

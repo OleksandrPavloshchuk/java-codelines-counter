@@ -24,8 +24,8 @@ public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory {
         }
         final ParserState newParserState = event.getNewParserState();
         if (newParserState == JavaParserState.CODE_LITERAL && isDelimiter(c)) {
-            if( oldParserState== JavaParserState.CODE_LITERAL) {
-                addKeywordOrIdentifier();
+            if (oldParserState == JavaParserState.CODE_LITERAL) {
+                addItem();
             } else {
                 addBlank();
             }
@@ -52,18 +52,31 @@ public class JavaParsedTextItemsFactory extends ParsedTextItemsFactory {
                     addChar();
                     return;
                 case CODE_LITERAL:
-                    addKeywordOrIdentifier();
+                    addItem();
             }
         }
         append(c);
     }
 
-    private void addKeywordOrIdentifier() {
+    private void addItem() {
         if (isKeyword()) {
             addKeyword();
+        } else if (isAnnotation()) {
+            addMeta();
+        } else if (isNumber()) {
+            addNumber();
         } else {
             addIdentifier();
         }
+    }
+
+    private boolean isAnnotation() {
+        return '@' == getFirstChar();
+    }
+
+    private boolean isNumber() {
+        final char c = getFirstChar();
+        return '0' <= c && '9' >= c;
     }
 
 }
