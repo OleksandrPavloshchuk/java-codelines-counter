@@ -6,7 +6,7 @@ public class PrinterFactory {
         if (contains(args, "--html")) {
             return new HtmlPrinter();
         } else {
-            throw new IllegalArgumentException("not implemented yet");
+            return new ColoredConsolePrinter();
         }
     }
 
