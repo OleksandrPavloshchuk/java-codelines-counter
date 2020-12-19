@@ -25,7 +25,7 @@ public class JavaLanguageInfo implements LanguageInfo {
             "static", "default", "super", "this", "import", "else",
             "boolean", "int", "float", "double", "long", "short",
             "char", "byte", "package", "synchronized", "try", "catch", "finally",
-            "true", "false",  "void", "throws",
+            "true", "false",  "void", "throws", "null",
             "volatile", "if", "for", "while", "do", "switch",
             "case", "new", "break", "continue", "goto", "return"
     );
