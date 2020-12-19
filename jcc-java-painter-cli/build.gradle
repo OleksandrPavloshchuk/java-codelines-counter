@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'org.jcc'
-version = '0.0.2.a'
+version = '0.0.3'
 sourceCompatibility = '8'
 
 mainClassName = 'org.jcc.java.painter.cli.Main'

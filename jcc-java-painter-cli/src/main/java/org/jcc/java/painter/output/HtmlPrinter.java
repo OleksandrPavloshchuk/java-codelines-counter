@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.List;
 import org.jcc.items.ParsedTextItem;
 
-public class HtmlPrinter implements ParsedTextItemsPrinter {
+class HtmlPrinter implements ParsedTextItemsPrinter {
 
     private enum HtmlClass {
         BLANK("black"),

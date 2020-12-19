@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import org.jcc.java.painter.output.HtmlPrinter;
+import org.jcc.java.painter.output.PrinterFactory;
 import org.jcc.parsers.CharsProcessor;
 import org.jcc.parsers.impl.java.JavaParsedTextItemsFactory;
 import org.jcc.parsers.impl.java.JavaParserState;
@@ -24,11 +24,12 @@ public class Main {
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "error reading file " + file.getPath(), ex);
                 }
-                new HtmlPrinter().print(parsedTextItemFactory.getItems(), System.out);
+                PrinterFactory.build(args).print(parsedTextItemFactory.getItems(), System.out);
             }
         }
     }
 
+    // How to use this application
     private static boolean printHelpMessage(String[] args) {
         if (Stream.of(args).anyMatch(s -> "--help".equals(s) || "-h".equals(s))) {
             System.out.println("Usage: <file name> [--html for output as HTML-page]");
