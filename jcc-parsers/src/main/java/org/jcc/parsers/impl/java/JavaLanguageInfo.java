@@ -22,9 +22,10 @@ public class JavaLanguageInfo implements LanguageInfo {
     private static final Collection<String> KEYWORDS = Arrays.asList(
             "class", "interface", "extends", "implements",
             "private", "protected", "public", "final", "abstract",
-            "static", "default", "super", "this", "import",
+            "static", "default", "super", "this", "import", "else",
             "boolean", "int", "float", "double", "long", "short",
-            "char", "byte", "package", "synchronized",
+            "char", "byte", "package", "synchronized", "try", "catch", "finally",
+            "true", "false",
             "volatile", "if", "for", "while", "do", "switch",
             "case", "new", "break", "continue", "goto", "return"
     );

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Char by char processor
@@ -13,9 +15,9 @@ public class CharsProcessor {
     private ParserState parserState;
     private final Collection<Consumer<NextParserStateEvent>> listeners;
 
-    public CharsProcessor(ParserState parserState, Collection<Consumer<NextParserStateEvent>> listeners) {
+    public CharsProcessor(ParserState parserState, Consumer<NextParserStateEvent>... listeners) {
         this.parserState = parserState;
-        this.listeners = listeners;
+        this.listeners = Stream.of(listeners).collect(Collectors.toList());        
     }
 
     public void loopByChars(InputStream inputStream) throws IOException {

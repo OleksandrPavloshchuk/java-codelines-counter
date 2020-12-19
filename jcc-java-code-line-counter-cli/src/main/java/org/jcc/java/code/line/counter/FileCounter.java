@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.function.Consumer;
 import org.jcc.java.code.line.counter.model.CountedLines;
 import org.jcc.java.code.line.counter.model.FileCountedLines;
@@ -22,13 +20,8 @@ import org.jcc.parsers.impl.java.JavaParserState;
  */
 class FileCounter extends CounterBase {
 
-    // Is current line contains code?
     private boolean lineContainsCode = false;
-    // Counter
     private int count = 0;
-    // Parse state change listeners
-    private final Collection<Consumer<NextParserStateEvent>> listeners
-            = Arrays.asList(getListener());
 
     FileCounter(File file) throws FileNotFoundException {
         super(file);
@@ -37,7 +30,7 @@ class FileCounter extends CounterBase {
     @Override
     public CountedLines count() throws IOException {
         try (final InputStream inputStream = new FileInputStream(file)) {
-            new CharsProcessor(JavaParserState.CODE_BLANK, listeners).loopByChars(inputStream);
+            new CharsProcessor(JavaParserState.CODE_BLANK, getListener()).loopByChars(inputStream);
         }
         final FileCountedLines result = new FileCountedLines(file.getName());
         result.setCount(count);

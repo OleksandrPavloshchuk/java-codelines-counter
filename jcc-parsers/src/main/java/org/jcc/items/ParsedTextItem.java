@@ -6,9 +6,7 @@ package org.jcc.items;
 public class ParsedTextItem {
 
     public enum Type {
-        // TODO add numbers here
-        // TODO add annotations here
-        BLANK, COMMENT, STRING, CHAR, KEYWORD, DELIMITER, IDENTIFIER
+        BLANK, COMMENT, STRING, CHAR, KEYWORD, DELIMITER, IDENTIFIER, NUMBER, META
     }
 
     private final String text;
@@ -25,6 +23,11 @@ public class ParsedTextItem {
 
     public Type getType() {
         return type;
+    }
+    
+    @Override
+    public String toString() {
+        return "{" + type.name() + ": '" + text + "'}";
     }
          
 }
