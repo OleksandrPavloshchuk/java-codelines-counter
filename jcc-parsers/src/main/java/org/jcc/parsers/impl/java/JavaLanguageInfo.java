@@ -16,7 +16,7 @@ public class JavaLanguageInfo implements LanguageInfo {
             (int) '{', (int) '}', (int) '(', (int) ')',
             (int) '[', (int) ']', (int) '<', (int) '>',
             (int) '=', (int) '~', (int) '!', (int) '&',
-            (int) '^', (int) '%'
+            (int) '^', (int) '%', (int) '|'
     );
 
     private static final Collection<String> KEYWORDS = Arrays.asList(
@@ -25,7 +25,7 @@ public class JavaLanguageInfo implements LanguageInfo {
             "static", "default", "super", "this", "import", "else",
             "boolean", "int", "float", "double", "long", "short",
             "char", "byte", "package", "synchronized", "try", "catch", "finally",
-            "true", "false",  "void", "throws", "null",
+            "true", "false",  "void", "throws", "null", "throw",
             "volatile", "if", "for", "while", "do", "switch",
             "case", "new", "break", "continue", "goto", "return"
     );
